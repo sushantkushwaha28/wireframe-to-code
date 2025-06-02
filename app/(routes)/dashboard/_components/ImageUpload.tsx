@@ -11,11 +11,7 @@ const ImageUpload = () => {
             </label>
         </div>
         <div>
-            <p className='text-gray-500 mt-5'>Supported formats: JPG, PNG, GIF</p>
-            <p className='text-gray-500'>Max file size: 5MB</p>
-        </div>
-        <div>
-            
+
         </div>
     </div>
   )
