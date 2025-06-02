@@ -15,5 +15,6 @@ export function useIsMobile() {
     return () => mql.removeEventListener("change", onChange)
   }, [])
 
+  // Return true if the screen width is less than the mobile breakpoint
   return !!isMobile
 }
