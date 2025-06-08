@@ -1,6 +1,6 @@
 "use client";
 
-import { CloudUpload } from 'lucide-react';
+import { CloudUpload, WandSparkles } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {X} from 'lucide-react';
 import React, { ChangeEvent, useState } from 'react';
@@ -20,9 +20,9 @@ const ImageUpload = () => {
 
   return (
     <div className='mt-10'>
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
+      <div className='grid grid-cols-1 md:grid-cols-2 sm:grid-cols-3 gap-10'>
         {!previewUrl && (
-          <div className='px-12 py-10 border-dashed rounded-md shadow-md flex flex-col items-center justify-center'>
+          <div className='p-7 border-dashed rounded-md shadow-md flex flex-col items-center justify-center'>
             <CloudUpload className='h-10 w-10' />
             <h2 className='text-lg font-semibold mt-4'>Upload Image</h2>
             <p className='text-gray-500 mt-2'>Click the button to upload</p>
@@ -54,10 +54,15 @@ const ImageUpload = () => {
             <X className='absolute left-2 top-2 flex justify-end items-end w-full cursor-pointer' onClick={()=>setPreviewUrl(null)}/>
           </div>
         )}
-        <div className='p-7 '>
-          <h2>Enter Description about the image</h2>
-          <Textarea/>
+        <div className='p-7 border shadow-md rounded-lg'>
+          <h2 className='font-bold text-lg'>Enter Description about the image</h2>
+          <Textarea className='mt-3 h-[200px]' placeholder='Write about your web page'/>
         </div>
+      </div>
+      <div className='mt-10 flex items-center justify-center w-full'>
+        <Button className='w-full'><WandSparkles/> 
+          Convert to Code
+        </Button>
       </div>
       </div>
   );
