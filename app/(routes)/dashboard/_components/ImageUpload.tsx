@@ -4,6 +4,7 @@ import { CloudUpload } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {X} from 'lucide-react';
 import React, { ChangeEvent, useState } from 'react';
+import { Textarea } from '@/components/ui/textarea';
 
 const ImageUpload = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -53,12 +54,12 @@ const ImageUpload = () => {
             <X className='absolute left-2 top-2 flex justify-end items-end w-full cursor-pointer' onClick={()=>setPreviewUrl(null)}/>
           </div>
         )}
+        <div className='p-7 '>
+          <h2>Enter Description about the image</h2>
+          <Textarea/>
+        </div>
       </div>
-
-      <div className='mt-10'>
-        <h2 className='text-lg font-semibold mb-2'>User Input TextArea</h2>
       </div>
-    </div>
   );
 };
 
