@@ -25,7 +25,7 @@ const ImageUpload = () => {
             <CloudUpload className='h-10 w-10' />
             <h2 className='text-lg font-semibold mt-4'>Upload Image</h2>
             <p className='text-gray-500 mt-2'>Click the button to upload</p>
-            <div className='p-5 border border-dashed rounded-md mt-4 w-full max-w-md flex items-center justify-center'>
+            <div className='p-5 border border-dashed rounded-md mt-4 w-full flex items-center justify-center'>
               <label htmlFor='imageSelect' className='cursor-pointer'>
                 <h2 className='p-2 bg-primary text-white rounded-md px-5'>Select Image</h2>
               </label>
@@ -43,20 +43,20 @@ const ImageUpload = () => {
         />
 
         {previewUrl && (
-          <div className='p-5 border border-dashed shadow-md flex items-center justify-center'>
-            <X />
+          <div className='relative px-10 py-10  w-[400px] h-[400px] border border-dashed shadow-md flex items-center justify-center'>
             <img
               src={previewUrl}
               alt='Uploaded preview'
-              className='w-[300px] h-[300px]  rounded-md shadow-md object-contain'
+              className='rounded-md shadow-md object-contain w-full h-full'
+              
             />
+            <X className='absolute left-2 top-2 flex justify-end items-end w-full cursor-pointer' onClick={()=>setPreviewUrl(null)}/>
           </div>
         )}
       </div>
 
       <div className='mt-10'>
         <h2 className='text-lg font-semibold mb-2'>User Input TextArea</h2>
-        <textarea className='w-full p-2 border rounded-md' rows={4}></textarea>
       </div>
     </div>
   );
