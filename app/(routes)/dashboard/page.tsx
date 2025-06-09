@@ -1,6 +1,6 @@
 import React from 'react'
 import ImageUpload from './_components/ImageUpload'
-
+// import ImageUploader from './components/ImageUploader'
 function Dashboard() {
     return (
         <div className='lg:px-40 xl:px-60'>

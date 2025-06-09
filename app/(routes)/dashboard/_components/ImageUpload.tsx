@@ -1,22 +1,72 @@
 "use client";
-
+import supabase from '@/utils/supabaseClient'// Adjust the import path as necessary
 import { CloudUpload, WandSparkles } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {X} from 'lucide-react';
 import React, { ChangeEvent, useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
+import { DropdownMenu } from '@/components/ui/dropdown-menu';
+import { uploadBytes } from 'firebase/storage';
+// import { storage } from '@/configs/firebaseConfig'; // Adjust the import path as necessary
+// import { storage } from '@/lib/firebase'; // Adjust the import path as necessary
+
+// import { Select } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 
 const ImageUpload = () => {
+  const AiModelList=[
+    {name:"Gemini Google",
+      icon:"/gemini-logo.webp",
+    },{
+      name:"GPT-4",
+      icon:"/ChatGPT-Logo.png",
+    },{
+      name:"Deepseek",
+      icon:"/list.jpg",
+    }
+  ]
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [file, setFile] = useState<any>(null);
+  const [selectedModel, setSelectedModel] = useState<string | null>(null);
+  const [description, setDescription] = useState<string>('');
 
   const onImageSelect = (event: ChangeEvent<HTMLInputElement>) => {
+    if(!file || selectedModel || !description){
+      console.log('Please select a model and enter a description before uploading an image.');
+      return;
+    }
     const files = event.target.files;
     if (files && files.length > 0) {
       console.log('Selected file:', files[0]);
+      setFile(files[0]);
       const imageUrl = URL.createObjectURL(files[0]);
       setPreviewUrl(imageUrl);
     }
   };
+
+  const OnConvertToCodeButtonClick=async()=>{
+    // save image to database
+    const fileName=Date.now() + '-' + Math.random().toString(36).substring(2, 15) + '.png';
+    
+  const { data, error } = await supabase.storage
+    .from('user-files') // replace with your bucket name
+    .upload(`images/${fileName}`, file);
+
+  console.log('✅ Image uploaded successfully:', data);
+
+  // To get the public URL:
+  const { data: publicUrlData } = supabase.storage.from('user-files')
+    .getPublicUrl(`images/${fileName}`);
+
+  console.log('🌐 Public URL:', publicUrlData.publicUrl);
+  }
 
   return (
     <div className='mt-10'>
@@ -55,12 +105,28 @@ const ImageUpload = () => {
           </div>
         )}
         <div className='p-7 border shadow-md rounded-lg'>
-          <h2 className='font-bold text-lg'>Enter Description about the image</h2>
-          <Textarea className='mt-3 h-[200px]' placeholder='Write about your web page'/>
+          <h2>Select AI Model</h2>
+          <Select onValueChange={(value) => setSelectedModel(value)} >
+  <SelectTrigger className="w-full">
+    <SelectValue placeholder="Select AI" />
+  </SelectTrigger>
+  <SelectContent>
+    {AiModelList.map((model, index) => (
+      <SelectItem key={index} value={model.name}>
+        <div className='flex items-center gap-2'>
+          <img src={model.icon} alt={model.name} className='w-8 h-8 rounded-full' />
+          <h2>{model.name}</h2>
+        </div>
+      </SelectItem>
+    ))}
+  </SelectContent>
+</Select>
+          <h2 className='font-bold text-lg mt-7'>Enter Description about the image</h2>
+          <Textarea className='mt-3 h-[200px]' placeholder='Write about your web page' onChange={(event)=>setDescription(event?.target.value)}/>
         </div>
       </div>
       <div className='mt-10 flex items-center justify-center w-full'>
-        <Button className='w-full'><WandSparkles/> 
+        <Button onClick={OnConvertToCodeButtonClick} className='w-full'><WandSparkles/> 
           Convert to Code
         </Button>
       </div>

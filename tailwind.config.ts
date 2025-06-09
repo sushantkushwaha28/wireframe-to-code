@@ -10,10 +10,10 @@ export default {
   theme: {
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
+  			background: '#EAEFEF',
   			foreground: 'hsl(var(--foreground))',
   			card: {
-  				DEFAULT: 'hsl(var(--card))',
+  				DEFAULT: '#EAEFEF',
   				foreground: 'hsl(var(--card-foreground))'
   			},
   			popover: {
@@ -21,11 +21,11 @@ export default {
   				foreground: 'hsl(var(--popover-foreground))'
   			},
   			primary: {
-  				DEFAULT: '#4f46e5',
+  				DEFAULT: '#333446',
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
+  				DEFAULT: '#7F8CAA',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
   			muted: {
