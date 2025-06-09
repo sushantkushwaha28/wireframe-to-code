@@ -7,6 +7,7 @@ import React, { ChangeEvent, useState } from 'react';
 import { Textarea } from '@/components/ui/textarea';
 import { DropdownMenu } from '@/components/ui/dropdown-menu';
 import { uploadBytes } from 'firebase/storage';
+// import {storage} 
 // import { storage } from '@/configs/firebaseConfig'; // Adjust the import path as necessary
 // import { storage } from '@/lib/firebase'; // Adjust the import path as necessary
 
